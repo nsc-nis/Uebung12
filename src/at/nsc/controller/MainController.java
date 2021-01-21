@@ -1,5 +1,7 @@
 package at.nsc.controller;
 
+import at.nsc.model.ColorCode;
+import at.nsc.model.Model;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -67,45 +69,59 @@ public class MainController implements Initializable
     @FXML
     private void action_red_plus()
     {
-        increaseColour("red");
+        increaseColour("red", textField_red.getText());
     }
 
     @FXML
     private void action_red_minus()
     {
-        decreaseColour("red");
+        decreaseColour("red", textField_red.getText());
     }
 
     @FXML
     private void action_green_plus()
     {
-        increaseColour("green");
+        increaseColour("green", textField_green.getText());
     }
 
     @FXML
     private void action_green_minus()
     {
-        decreaseColour("green");
+        decreaseColour("green", textField_green.getText());
     }
 
     @FXML
     private void action_blue_plus()
     {
-        increaseColour("blue");
+        increaseColour("blue", textField_green.getText());
     }
 
     @FXML
     private void action_blue_minus()
     {
-        decreaseColour("blue");
+        decreaseColour("blue", textField_blue.getText());
     }
 
-    private void increaseColour(String colour)
+    private void increaseColour(String colour, String value)
     {
-        System.out.println("Test +");
+        int intValue = Integer.parseInt(value);
+        switch (colour)
+        {
+            case "red":
+                Model.changeColorViaAbsoluteValue(ColorCode.RED, intValue);
+                break;
+            case "green":
+                Model.changeColorViaAbsoluteValue(ColorCode.GREEN, intValue);
+                break;
+            case "blue":
+                Model.changeColorViaAbsoluteValue(ColorCode.BLUE, intValue);
+                break;
+            default:
+                break;
+        }
     }
 
-    private void decreaseColour(String colour)
+    private void decreaseColour(String colour, String value)
     {
         System.out.println("Test -");
     }
