@@ -34,6 +34,8 @@ public class MainController implements Initializable
     @FXML
     private TextField textField_blue;
 
+    private Model model = new Model();
+
     public static void show(Stage stage)
     {
         try
@@ -63,66 +65,150 @@ public class MainController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        label_color.setStyle("-fx-background-color: #FFFFFF");
     }
 
     @FXML
     private void action_red_plus()
     {
-        increaseColour("red", textField_red.getText());
+        increaseColour("red");
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_red.setText(String.format("%d", model.getRed()));
     }
 
     @FXML
     private void action_red_minus()
     {
-        decreaseColour("red", textField_red.getText());
+        decreaseColour("red");
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_red.setText(String.format("%d", model.getRed()));
     }
 
     @FXML
     private void action_green_plus()
     {
-        increaseColour("green", textField_green.getText());
+        increaseColour("green");
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_green.setText(String.format("%d", model.getGreen()));
     }
 
     @FXML
     private void action_green_minus()
     {
-        decreaseColour("green", textField_green.getText());
+        decreaseColour("green");
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_green.setText(String.format("%d", model.getGreen()));
     }
 
     @FXML
     private void action_blue_plus()
     {
-        increaseColour("blue", textField_green.getText());
+        increaseColour("blue");
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_blue.setText(String.format("%d", model.getBlue()));
     }
 
     @FXML
     private void action_blue_minus()
     {
-        decreaseColour("blue", textField_blue.getText());
+        decreaseColour("blue");
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_blue.setText(String.format("%d", model.getBlue()));
     }
 
-    private void increaseColour(String colour, String value)
+    @FXML
+    private void action_red_field()
     {
-        int intValue = Integer.parseInt(value);
+        setColour("red", textField_red.getText());
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_red.setText(String.format("%d", model.getRed()));
+    }
+
+    @FXML
+    private void action_green_field()
+    {
+        setColour("green", textField_green.getText());
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_green.setText(String.format("%d", model.getGreen()));
+    }
+
+    @FXML
+    private void action_blue_field()
+    {
+        setColour("blue", textField_blue.getText());
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_blue.setText(String.format("%d", model.getBlue()));
+    }
+
+    private void increaseColour(String colour)
+    {
         switch (colour)
         {
             case "red":
-                Model.changeColorViaAbsoluteValue(ColorCode.RED, intValue);
+                model.changeColorViaRelativeValue(ColorCode.RED, 10, true);
                 break;
             case "green":
-                Model.changeColorViaAbsoluteValue(ColorCode.GREEN, intValue);
+                model.changeColorViaRelativeValue(ColorCode.GREEN, 10, true);
                 break;
             case "blue":
-                Model.changeColorViaAbsoluteValue(ColorCode.BLUE, intValue);
+                model.changeColorViaRelativeValue(ColorCode.BLUE, 10, true);
                 break;
             default:
                 break;
         }
     }
 
-    private void decreaseColour(String colour, String value)
+    private void decreaseColour(String colour)
     {
-        System.out.println("Test -");
+        switch (colour)
+        {
+            case "red":
+                model.changeColorViaRelativeValue(ColorCode.RED, 10, false);
+                break;
+            case "green":
+                model.changeColorViaRelativeValue(ColorCode.GREEN, 10, false);
+                break;
+            case "blue":
+                model.changeColorViaRelativeValue(ColorCode.BLUE, 10, false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setColour(String colour, String value)
+    {
+        switch (colour)
+        {
+            case "red":
+                model.changeColorViaAbsoluteValue(ColorCode.RED, value);
+                break;
+            case "green":
+                model.changeColorViaAbsoluteValue(ColorCode.GREEN, value);
+                break;
+            case "blue":
+                model.changeColorViaAbsoluteValue(ColorCode.BLUE, value);
+                break;
+            default:
+                break;
+        }
     }
 }

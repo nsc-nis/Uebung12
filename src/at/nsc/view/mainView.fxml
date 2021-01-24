@@ -26,7 +26,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="textField_red" prefHeight="87.0" prefWidth="204.0" text="255" GridPane.rowIndex="1" />
+            <TextField fx:id="textField_red" onAction="#action_red_field" prefHeight="87.0" prefWidth="204.0" text="255" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" onAction="#action_red_plus" prefHeight="137.0" prefWidth="218.0" style="-fx-background-color: red;" text="+10" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" onAction="#action_red_minus" prefHeight="123.0" prefWidth="223.0" style="-fx-background-color: red;" text="-10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -34,8 +34,8 @@
             <Button mnemonicParsing="false" onAction="#action_green_minus" prefHeight="148.0" prefWidth="255.0" style="-fx-background-color: green;" text="-10" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" onAction="#action_blue_plus" prefHeight="125.0" prefWidth="221.0" style="-fx-background-color: blue;" text="+10" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" onAction="#action_blue_minus" prefHeight="195.0" prefWidth="281.0" style="-fx-background-color: blue;" text="-10" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="textField_green" prefHeight="90.0" prefWidth="204.0" text="255" GridPane.rowIndex="3" />
-            <TextField fx:id="textField_blue" prefHeight="93.0" prefWidth="204.0" text="255" GridPane.rowIndex="5" />
+            <TextField fx:id="textField_green" onAction="#action_green_field" prefHeight="90.0" prefWidth="204.0" text="255" GridPane.rowIndex="3" />
+            <TextField fx:id="textField_blue" onAction="#action_blue_field" prefHeight="93.0" prefWidth="204.0" text="255" GridPane.rowIndex="5" />
             <Label prefHeight="68.0" prefWidth="82.0" text="Red" textFill="RED">
                <font>
                   <Font name="System Bold" size="13.0" />
