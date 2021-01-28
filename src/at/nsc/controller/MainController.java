@@ -8,8 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -33,6 +35,10 @@ public class MainController implements Initializable
     private TextField textField_green;
     @FXML
     private TextField textField_blue;
+    @FXML
+    private Button button_save;
+    @FXML
+    private Button button_load;
 
     private Model model = new Model();
 
@@ -66,6 +72,8 @@ public class MainController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         label_color.setStyle("-fx-background-color: #FFFFFF");
+        //button_save.setGraphic(new Image());
+        //button_load.setGraphic(new Image());
     }
 
     @FXML
@@ -155,6 +163,37 @@ public class MainController implements Initializable
         String colour = model.getHex();
         label_color.setStyle(String.format("-fx-background-color: %s", colour));
         label_hex.setText(model.getHex());
+        textField_blue.setText(String.format("%d", model.getBlue()));
+    }
+
+    @FXML
+    private void action_save()
+    {
+        if(model.saveToFile())
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Save success");
+            alert.setContentText("Configuration successfully saved under ~/config/color.dat");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void action_load()
+    {
+        if(model.loadFromFile())
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Load success");
+            alert.setContentText("Configuration successfully loaded");
+            alert.showAndWait();
+        }
+
+        String colour = model.getHex();
+        label_color.setStyle(String.format("-fx-background-color: %s", colour));
+        label_hex.setText(model.getHex());
+        textField_red.setText(String.format("%d", model.getRed()));
+        textField_green.setText(String.format("%d", model.getGreen()));
         textField_blue.setText(String.format("%d", model.getBlue()));
     }
 

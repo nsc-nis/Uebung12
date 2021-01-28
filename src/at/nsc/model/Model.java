@@ -1,6 +1,9 @@
 package at.nsc.model;
 
 import at.nsc.main.Main;
+import javafx.scene.control.Alert;
+
+import java.io.*;
 import java.util.Scanner;
 
 /**Übung 12 - Model
@@ -312,6 +315,71 @@ public class Model
         System.out.println("Color successfully changed!");
         System.out.println("Current values:");
         m.toString();
+    }
+
+    public boolean saveToFile()
+    {
+        boolean hasWorked = false;
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("config/color.dat")))
+        {
+            bufferedWriter.write("Color File Format v.1.0");
+            bufferedWriter.newLine();
+            bufferedWriter.write(String.valueOf(getRed()));
+            bufferedWriter.newLine();
+            bufferedWriter.write(String.valueOf(getGreen()));
+            bufferedWriter.newLine();
+            bufferedWriter.write(String.valueOf(getBlue()));
+            hasWorked = true;
+        }
+        catch (IOException exception)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Save Error");
+            alert.setContentText(String.format("Could not save file!%n%nError message: %s", exception.getMessage()));
+            alert.showAndWait();
+            System.err.println(exception.getMessage());
+            exception.printStackTrace(System.err);
+            hasWorked = false;
+        }
+
+        return hasWorked;
+    }
+
+    public boolean loadFromFile()
+    {
+        String s;
+        boolean hasWorked = false;
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader("config/color.dat")))
+        {
+            if (bufferedReader.readLine().contains("Color File Format"))
+            {
+                changeColorViaAbsoluteValue(ColorCode.RED, bufferedReader.readLine());
+                changeColorViaAbsoluteValue(ColorCode.GREEN, bufferedReader.readLine());
+                changeColorViaAbsoluteValue(ColorCode.BLUE, bufferedReader.readLine());
+                hasWorked = true;
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Load Error");
+                alert.setContentText("File format not supported");
+                alert.showAndWait();
+                hasWorked = false;
+            }
+
+        }
+        catch (IOException exception)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Save Error");
+            alert.setContentText(String.format("Could not save file!%n%nError message: %s", exception.getMessage()));
+            alert.showAndWait();
+            System.err.println(exception.getMessage());
+            exception.printStackTrace(System.err);
+            hasWorked = false;
+        }
+
+        return hasWorked;
     }
 
     //aus einem meiner älteren Projekte kopierte animation

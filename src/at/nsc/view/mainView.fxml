@@ -54,6 +54,8 @@
             <Label fx:id="label_color" prefHeight="199.0" prefWidth="211.0" />
             <Label text="Hexcode" />
             <Label fx:id="label_hex" prefHeight="26.0" prefWidth="202.0" text="#FFFFFF" />
+            <Button fx:id="button_save" mnemonicParsing="false" onAction="#action_save" prefHeight="76.0" prefWidth="194.0" text="Save config" />
+            <Button fx:id="button_load" mnemonicParsing="false" onAction="#action_load" prefHeight="84.0" prefWidth="196.0" text="Load config" />
          </children>
       </VBox>
    </children>
