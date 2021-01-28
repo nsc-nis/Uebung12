@@ -173,7 +173,7 @@ public class MainController implements Initializable
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Save success");
-            alert.setContentText("Configuration successfully saved under ~/config/color.dat");
+            alert.setContentText(String.format("Configuration successfully saved under %n ~/config/color.dat"));
             alert.showAndWait();
         }
     }

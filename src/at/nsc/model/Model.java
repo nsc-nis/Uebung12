@@ -12,9 +12,9 @@ import java.util.Scanner;
  */
 public class Model
 {
-    private static  ModularCounter red;
-    private static ModularCounter green;
-    private static ModularCounter blue;
+    private  ModularCounter red;
+    private ModularCounter green;
+    private ModularCounter blue;
 
     public Model()
     {
@@ -23,7 +23,7 @@ public class Model
         blue = new ModularCounter(255, 256);
     }
 
-    public static void changeColorViaAbsoluteValue(ColorCode cc, String value)
+    public void changeColorViaAbsoluteValue(ColorCode cc, String value)
     {
         try
         {
@@ -38,7 +38,7 @@ public class Model
         }
     }
 
-    public static void changeColorViaAbsoluteValue(ColorCode cc, int value)
+    public void changeColorViaAbsoluteValue(ColorCode cc, int value)
     {
         try
         {
@@ -72,7 +72,7 @@ public class Model
         }
     }
 
-    public static void changeColorViaRelativeValue(ColorCode cc, int value, boolean increase)
+    public void changeColorViaRelativeValue(ColorCode cc, int value, boolean increase)
     {
         /*
         -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,22 +101,22 @@ public class Model
     }
 
 
-    public static int getRed()
+    public int getRed()
     {
         return red.getValue();
     }
 
-    public static int getGreen()
+    public int getGreen()
     {
         return green.getValue();
     }
 
-    public static int getBlue()
+    public int getBlue()
     {
         return blue.getValue();
     }
 
-    public static String getHex()
+    public String getHex()
     {
         String hexColorRed = String.format("%02X", (0xFF & getRed()));
         String hexColorGreen = String.format("%02X", (0xFF & getGreen()));
@@ -175,8 +175,8 @@ public class Model
             processingData();
 
             switch (command) {
-                case "action.color.change-absolute" -> absoluteValueCMD();
-                case "action.color.change-relative" -> relativeValueCMD();
+                case "action.color.change-absolute" -> m.absoluteValueCMD(m);
+                case "action.color.change-relative" -> m.relativeValueCMD(m);
                 case "action.color.view" -> {
                     processingData();
                     clearScreen();
@@ -194,9 +194,8 @@ public class Model
         while (isRunning);
     }
 
-    private static void absoluteValueCMD()
+    private void absoluteValueCMD(Model m)
     {
-        Model m = new Model();
         Scanner sc = new Scanner(System.in);
         String color = null;
         int colorValue = 0;
@@ -249,9 +248,8 @@ public class Model
         m.toString();
     }
 
-    private static void relativeValueCMD()
+    private void relativeValueCMD(Model m)
     {
-        Model m = new Model();
         Scanner sc = new Scanner(System.in);
         String color = null;
         int colorValue = 0;
@@ -300,13 +298,13 @@ public class Model
         switch (color)
         {
             case "red":
-                changeColorViaRelativeValue(ColorCode.RED, colorValue, increment);
+                m.changeColorViaRelativeValue(ColorCode.RED, colorValue, increment);
                 break;
             case "green":
-                changeColorViaRelativeValue(ColorCode.GREEN, colorValue, increment);
+                m.changeColorViaRelativeValue(ColorCode.GREEN, colorValue, increment);
                 break;
             case "blue":
-                changeColorViaRelativeValue(ColorCode.BLUE, colorValue, increment);
+                m.changeColorViaRelativeValue(ColorCode.BLUE, colorValue, increment);
                 break;
             default:
                 break;
