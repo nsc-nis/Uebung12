@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -54,6 +55,7 @@ public class MainController implements Initializable
             ctrl.stage = stage;
 
             stage.setTitle("Colour Calculator");
+            stage.getIcons().add(new Image("/at/nsc/images/icon_logo.png"));
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -72,8 +74,8 @@ public class MainController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         label_color.setStyle("-fx-background-color: #FFFFFF");
-        //button_save.setGraphic(new Image());
-        //button_load.setGraphic(new Image());
+        button_save.setGraphic(new ImageView(new Image("/at/nsc/images/icon_save.png")));
+        button_load.setGraphic(new ImageView(new Image("/at/nsc/images/icon_load.png")));
     }
 
     @FXML
